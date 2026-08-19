@@ -2,8 +2,8 @@ namespace Final_Project;
 
 public class TripInfo
 {
-    public string country;
-    public string city;
-    public DateTime dates;
-    public bool confirmedTrip;
+    public string country { get; set; }
+    public string city { get; set; }
+    public DateTime dates { get; set; }
+    public bool confirmedTrip { get; set; }
 }
