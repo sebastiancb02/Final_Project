@@ -8,4 +8,6 @@ public class User
     public int age { get; set; }
     public string gender { get; set; }
     public string nationality { get; set; }
+
+    public List<TripInfo> trips;
 }
