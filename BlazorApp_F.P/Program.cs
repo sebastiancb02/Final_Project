@@ -15,6 +15,7 @@ builder.Services.AddDefaultIdentity<BlazorApp_User>(options => options.SignIn.Re
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,8 +26,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+builder.Services.AddRazorPages();
+app.UseAuthentication();
+app.UseAuthorization();
 
+
+app.UseHttpsRedirection();
 
 app.UseAntiforgery();
 
