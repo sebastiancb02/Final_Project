@@ -27,9 +27,9 @@ if (!app.Environment.IsDevelopment())
 }
 
 builder.Services.AddRazorPages();
+app.MapRazorPages();
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 app.UseHttpsRedirection();
 
