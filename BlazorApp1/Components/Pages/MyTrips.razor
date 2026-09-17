@@ -1,0 +1,31 @@
+@page "/trips"
+@using Final_Project
+
+
+<PageTitle>My Trips</PageTitle>
+
+<h1>My Trips</h1>
+
+<p>Here you can see your planned trips</p>
+
+<div>
+    <h2>@_trip.city, @_trip.country</h2>
+    
+    <p>@_trip.startDate -> @_trip.endDate</p>
+    
+    <p>Booked: @_trip.tripAlreadyBooked</p>
+    
+</div>
+
+@code {
+
+    TripInfo _trip = new TripInfo()
+    {
+        country = "Netherlands",
+        city = "Amsterdam",
+        startDate = new DateOnly(2027, 1, 1),
+        endDate = new DateOnly(2027, 1, 16),
+        tripAlreadyBooked = true,
+    };
+
+}

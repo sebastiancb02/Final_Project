@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Final_Project", "Final_Project\Final_Project.csproj", "{4FF19DA1-C832-4FDE-8B8E-675EAFB09C92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp_F.P", "BlazorApp_F.P\BlazorApp_F.P.csproj", "{B42CC109-FE99-4B7E-B6FB-6CB4D1AD7B58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1", "BlazorApp1\BlazorApp1.csproj", "{53D060CD-3C58-4DEE-AAF6-A40B7D0BAAF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		{4FF19DA1-C832-4FDE-8B8E-675EAFB09C92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FF19DA1-C832-4FDE-8B8E-675EAFB09C92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FF19DA1-C832-4FDE-8B8E-675EAFB09C92}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B42CC109-FE99-4B7E-B6FB-6CB4D1AD7B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B42CC109-FE99-4B7E-B6FB-6CB4D1AD7B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B42CC109-FE99-4B7E-B6FB-6CB4D1AD7B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B42CC109-FE99-4B7E-B6FB-6CB4D1AD7B58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D060CD-3C58-4DEE-AAF6-A40B7D0BAAF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D060CD-3C58-4DEE-AAF6-A40B7D0BAAF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D060CD-3C58-4DEE-AAF6-A40B7D0BAAF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D060CD-3C58-4DEE-AAF6-A40B7D0BAAF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
