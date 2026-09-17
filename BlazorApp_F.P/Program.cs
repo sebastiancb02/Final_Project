@@ -26,7 +26,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-builder.Services.AddRazorPages();
+//builder.Services.AddRazorPages();
 app.MapRazorPages();
 app.UseAuthentication();
 app.UseAuthorization();
