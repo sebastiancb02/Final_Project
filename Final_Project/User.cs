@@ -9,5 +9,5 @@ public class User
     public string gender { get; set; }
     public string nationality { get; set; }
 
-    public List<TripInfo> trips;
+    public List<TripInfo> trips { get; set; } = new List<TripInfo>();
 }
