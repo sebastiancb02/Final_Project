@@ -10,7 +10,7 @@ public class Logic
         {
             foreach (var trip in user.trips)
             {
-                usersPerLocation.Add(trip.city,new List<User>());
+                usersPerLocation.TryAdd(trip.city,new List<User>());
             }
         }
 
