@@ -32,4 +32,35 @@ public class Logic
         
         return usersPerLocation;
     }
+    
+    public static Dictionary<int, List<User>> MatchUsersByOverlappingDates(List<User> listOfUsers)
+    {
+        var allUsersMatchedByDates = new Dictionary<int, List<User>>(); 
+        
+        foreach (var u in listOfUsers)
+        {
+            foreach (var tripU in u.trips)
+            {    
+                foreach (var mu in listOfUsers)
+                {
+                    if (mu.userId == u.userId)
+                    {
+                        continue;
+                    }    
+                    
+                    foreach (var tripMu in mu.trips)
+                    { 
+                        if (tripMu.startDate < tripU.endDate && tripMu.endDate > tripU.startDate)
+                        {
+                            allUsersMatchedByDates.TryAdd(u.userId, new List<User>());
+                            allUsersMatchedByDates[u.userId].Add(mu);
+                        }
+                    }    
+                }
+            }    
+        }
+
+        return allUsersMatchedByDates;
+    }    
 }
+
