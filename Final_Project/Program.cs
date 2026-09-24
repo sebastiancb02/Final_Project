@@ -8,6 +8,7 @@ class Program
         
         //Users-------------------------------------------------------------------------------------------
         User user1 = new User();
+        user1.userId = 1;
         user1.name = "John";
         user1.age = 21;
         user1.gender = "male";
@@ -15,6 +16,7 @@ class Program
         listOfUsers.Add(user1);
         
         User user2 = new User();
+        user2.userId = 2;
         user2.name = "Jane";
         user2.age = 20;
         user2.gender = "female";
@@ -22,6 +24,7 @@ class Program
         listOfUsers.Add(user2);
         
         User user3 = new User();
+        user3.userId = 3;
         user3.name = "Felicia";
         user3.age = 22;
         user3.gender = "female";
@@ -29,6 +32,7 @@ class Program
         listOfUsers.Add(user3);
         
         User user4 = new User();
+        user4.userId = 4;
         user4.name = "Michael";
         user4.age = 21;
         user4.gender = "male";
@@ -68,6 +72,7 @@ class Program
         trip4.tripAlreadyBooked = true;
         user4.trips.Add(trip4);
         
+        //Testing some data--------------------------------------------------------------------------------------------
         var usersPerLocation = Logic.MatchUsersByLocation(listOfUsers);
 
         foreach (var location in usersPerLocation)
@@ -80,5 +85,17 @@ class Program
             }
         }
         
+        var allUsersMatchedByDates = Logic.MatchUsersByOverlappingDates(listOfUsers);
+        
+        foreach (var user in allUsersMatchedByDates)
+        {
+            Console.WriteLine($"User: {user.Key}");
+            
+            foreach (var mu in user.Value)
+            {
+                Console.WriteLine($"  - {mu.userId}");
+            }      
+        }    
+
     }
 }
