@@ -32,7 +32,7 @@ public class Logic
         
         return usersPerLocation;
     }
-    
+        
     public static Dictionary<int, List<User>> MatchUsersByOverlappingDates(List<User> listOfUsers)
     {
         var allUsersMatchedByDates = new Dictionary<int, List<User>>(); 
@@ -61,6 +61,8 @@ public class Logic
         }
 
         return allUsersMatchedByDates;
-    }    
+    }
+    
+    
 }
 

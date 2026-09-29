@@ -7,6 +7,7 @@ public class User
     public int userId { get; set; }
     public string name { get; set; }
     public int age { get; set; }
+    public DateOnly dateOfBirth  { get; set; }
     public string gender { get; set; }
     public string nationality { get; set; }
 
