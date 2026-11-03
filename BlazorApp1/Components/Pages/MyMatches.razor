@@ -1,11 +1,28 @@
 @page "/matches"
+@using Final_Project
 
-<PageTitle>My Matches</PageTitle>
+<PageTitle>Your Matches</PageTitle>
 
-<h1>Your Matches</h1>
-
-<p>Your matching travelers will appear here.</p>
+@foreach(var u in MatchedUsers)
+{
+    foreach (var uTrip in u.trips)
+    {
+        <p>@u.name</p>
+        <p>@u.age</p>
+        <p>@u.nationality</p>
+        <p>@uTrip.startDate</p>
+        <p>@uTrip.endDate</p>
+    }
+}   
 
 @code {
+    public List<User> MatchedUsers { get; set; }
     
+    protected override void OnInitialized()
+    {
+        List<User> listOfUsers = Data.GetUsers();
+        
+        var matches = Logic.MatchUsersBothByLocationAndOverlappingDates(listOfUsers);
+        MatchedUsers = matches.First().Value;
+    }
 }

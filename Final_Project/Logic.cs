@@ -62,6 +62,45 @@ public class Logic
 
         return allUsersMatchedByDates;
     }
+
+    public static Dictionary<int, List<User>> MatchUsersBothByLocationAndOverlappingDates(List<User> listOfUsers)
+    {                                                                                                            
+        var usersPerLocation = Logic.MatchUsersByLocation(listOfUsers);                                          
+        var allUsersMatchedByDates = Logic.MatchUsersByOverlappingDates(listOfUsers);                            
+        var matchUsersBothByLocationAndOverlappingDates = new Dictionary<int, List<User>>();                     
+                                                                                                             
+        foreach (var usersInCity in  usersPerLocation.Values)                                                               
+        {
+            foreach (var u in usersInCity)
+            {
+                foreach (var mu in usersInCity)
+                {
+                    if (mu.userId == u.userId)
+                    {
+                        continue;
+                    }
+
+                    if (allUsersMatchedByDates.ContainsKey(u.userId) && allUsersMatchedByDates[u.userId].Contains(mu))
+                    {
+                        matchUsersBothByLocationAndOverlappingDates.TryAdd(u.userId, new List<User>());
+                        matchUsersBothByLocationAndOverlappingDates[u.userId].Add(mu);
+                    }
+                }
+            }                                                                                                     
+        }                                                                                                        
+                                                                                                             
+        return matchUsersBothByLocationAndOverlappingDates;                                                          
+    }                                                                                                            
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
     
     
 }

@@ -1,0 +1,133 @@
+@page "/profile"
+@using Final_Project
+@using System 
+@using System.IO
+@using Microsoft.AspNetCore.Hosting
+@inject ILogger<UserProfile> Logger
+@inject IWebHostEnvironment Environment
+
+<h3>Your Profile</h3>
+
+- user name, user age ---------------------------------------------------
+<p>@u.name</p>
+<p>@u.age</p>
+
+- Pictures, or upload more if wanted ------------------------------------
+
+
+
+<p>
+    <label>
+        Upload up to @maxAllowedFiles of up to @maxFileSize bytes:
+        <InputFile OnChange="LoadFiles" multiple />
+    </label>
+</p>
+
+@if (isLoading)
+{
+    <p>Uploading...</p>
+}
+else
+{
+    <ul>
+        @foreach (var file in loadedFiles)
+        {
+            <li>
+                <ul>
+                    <li>Name: @file.Name</li> 
+                    <li>Last modified: @file.LastModified.ToString()</li>
+                    <li>Size (bytes): @file.Size</li>
+                    <li>Content type: @file.ContentType</li>
+                </ul>
+            </li>
+        }
+    </ul>
+}
+
+- About Me --------------------------------------------------------------
+<div class="mb-3">
+    <label for="aboutMe" class="form-label">About me</label>
+
+    <textarea id="aboutMe"
+              class="form-control"
+              @bind="aboutMe"
+              rows="5"
+              placeholder="About me...">
+    </textarea>
+</div>
+
+<button class="btn btn-primary" @onclick="SaveAboutMe">
+    Save
+</button>
+
+- Languages --------------------------------------------------------------
+@foreach (var u in listOfUsers)
+{
+    <p>@u.languagesSpokenByUser</p>        
+}
+
+
+@code {
+
+    //To display user name and age
+    List<User> listOfUsers = Data.GetUsers();
+    User u => listOfUsers.First();
+    
+    //First attempt to display a profile picture
+    private List<IBrowserFile> loadedFiles = [];
+    private long maxFileSize = 1024 * 100;
+    private int maxAllowedFiles = 5;
+    private bool isLoading;
+
+    public async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        isLoading = true;
+        loadedFiles.Clear();
+
+        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+        {
+            try
+            {
+                var imageType = "profile";
+                var ext = Path.GetExtension(file.Name);
+                var trustedFileName = $"{u.userId}_{imageType}{ext}";
+                
+                var uploadsFolder = Path.Combine(Environment.WebRootPath, "unsafe_uploads");
+
+                Directory.CreateDirectory(uploadsFolder);
+                var path = Path.Combine(uploadsFolder, trustedFileName);
+                
+                await using FileStream fs = new(path, FileMode.Create);
+                await file.OpenReadStream(maxFileSize).CopyToAsync(fs);
+
+                loadedFiles.Add(file);
+
+                Logger.LogInformation("Unsafe Filename: {UnsafeFilename} File saved: {Filename}", file.Name, trustedFileName);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError("File: {Filename} Error: {Error}", file.Name, ex.Message);
+            }
+        }
+
+        isLoading = false;
+        
+        //public void ShowImage(int id) => imageSource = path;
+    }
+
+    
+    
+    //About me section, but maybe later coz this is written when registering 
+    private string aboutMe = string.Empty;
+    private bool saved;
+
+    private void SaveAboutMe()
+    {
+        saved = true;
+    }
+    
+    //Languages
+    public List<Languages> languagesSpokenByUser { get; set; }
+    
+    
+}}

@@ -4,28 +4,52 @@
 
 <PageTitle>My Trips</PageTitle>
 
-<h1>My Trips</h1>
-
-<p>Here you can see your planned trips</p>
-
-<div>
-    <h2>@_trip.city, @_trip.country</h2>
+<div class="trips-page">
+    <header class="trips-header">
+        <h1>Your trips</h1>
+        <p class="subtitle">Everywhere you're planning to go.</p>
+    </header>
     
-    <p>@_trip.startDate -> @_trip.endDate</p>
+    <AddTrip />
     
-    <p>Booked: @_trip.tripAlreadyBooked</p>
+    <div class="trip-list">
+        @if (currentUser != null)
+        {
+            foreach (var trip in currentUser.trips)
+            {
+                <article class="ticket">
+                    <div class="ticket-main">
+                        <div class="stamp">@trip.city.Substring(0, Math.Min(3, trip.city.Length)).ToUpperInvariant()</div>
+                        <div class="ticket-info">
+                            <h2>@trip.city, @trip.country</h2>
+                            <p class="dates">@trip.startDate.ToString("MMM d") → @trip.endDate.ToString("MMM d, yyyy")</p>
+                        </div>
+                    </div>
+                    <div class="ticket-divider"></div>
+                    <div class="ticket-status">
+                        @if (trip.tripAlreadyBooked)
+                        {
+                            <span class="status-tag booked">Booked</span>
+                        }
+                        else
+                        {
+                            <span class="status-tag planning">Planning</span>
+                        }
+                    </div>
+                </article>
+            }
+        }
+        
+    </div>
     
 </div>
 
 @code {
+    private User? currentUser;
 
-    TripInfo _trip = new TripInfo()
+    protected override void OnInitialized()
     {
-        country = "Netherlands",
-        city = "Amsterdam",
-        startDate = new DateOnly(2027, 1, 1),
-        endDate = new DateOnly(2027, 1, 16),
-        tripAlreadyBooked = true,
-    };
-
+        List<User> listOfUsers = Data.GetUsers();
+        currentUser = listOfUsers.FirstOrDefault(u => u.userId == 1);
+    }
 }

@@ -7,4 +7,5 @@ public enum ActivityType
     Culture,
     Sport,
     Social,
+    Other,
 }

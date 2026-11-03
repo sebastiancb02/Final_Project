@@ -1,0 +1,44 @@
+@using Final_Project
+
+<EditForm Model="newTripAddedByUser"
+          OnValidSubmit="AddingTrip"
+          FormName="AddTrip">
+
+	<DataAnnotationsValidator />
+
+	<div style="display: flex; flex-direction: column; gap: 8px; max-width: 350px;">
+	
+		<label>Country</label>
+		<InputText @bind-Value="newTripAddedByUser.country" />
+
+		<label>City</label>
+		<InputText @bind-Value="newTripAddedByUser.city" />
+
+		<label>Start date</label>
+		<InputDate @bind-Value="newTripAddedByUser.startDate" />
+
+		<label>End date</label>
+		<InputDate @bind-Value="newTripAddedByUser.endDate" />
+
+		<label>
+			<InputCheckbox @bind-Value="newTripAddedByUser.tripAlreadyBooked" />
+			Already booked?
+		</label>
+
+		<button type="submit">Add trip</button>
+	</div>
+	
+</EditForm>
+
+
+@code {
+	private TripInfo newTripAddedByUser { get; set; } = new();
+
+	private List<TripInfo> trips { get; set; } = new();
+	
+    private void AddingTrip()
+    {
+	    trips.Add(newTripAddedByUser);
+	    //newTripAddedByUser = new TripInfo();
+    }
+}
