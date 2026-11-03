@@ -12,11 +12,8 @@ public class User
     public string nationality { get; set; }
     public List<Languages> languagesSpokenByUser { get; set; } //= new List<Languages>;
     public List<TripInfo> trips { get; set; } = new List<TripInfo>();
-
-
     public List<PlannedActivity> listOfActivitiesPlannedByUser { get; set; } = new List<PlannedActivity>();
     public List<PlannedActivity> listOfActivitiesParticipatedByUser { get; set; }
-
-    public List<UserImage> images { get; set; } = new();
+    public UserImage image { get; set; } 
 
 }    
