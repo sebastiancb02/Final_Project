@@ -29,4 +29,8 @@
       <ProjectReference Include="..\Final_Project\Final_Project.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\unsafe_uploads\" />
+    </ItemGroup>
+
 </Project>
