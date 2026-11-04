@@ -103,6 +103,8 @@ else
                 loadedFiles.Add(file);
 
                 Logger.LogInformation("Unsafe Filename: {UnsafeFilename} File saved: {Filename}", file.Name, trustedFileName);
+                
+                u.image.profileImagePath = @"unsafe_uploads/{trustedFileName}";
             }
             catch (Exception ex)
             {

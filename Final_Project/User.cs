@@ -14,6 +14,6 @@ public class User
     public List<TripInfo> trips { get; set; } = new List<TripInfo>();
     public List<PlannedActivity> listOfActivitiesPlannedByUser { get; set; } = new List<PlannedActivity>();
     public List<PlannedActivity> listOfActivitiesParticipatedByUser { get; set; }
-    public UserImage image { get; set; } 
+    public UserImage image { get; set; } = new();
 
 }    
