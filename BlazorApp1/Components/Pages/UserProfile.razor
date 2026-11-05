@@ -8,11 +8,9 @@
 
 <h3>Your Profile</h3>
 
-- user name, user age ---------------------------------------------------
 <p>@u.name</p>
 <p>@u.age</p>
 
-- Pictures, or upload more if wanted ------------------------------------
 
 <img src="@u.image.profileImagePath" 
      width="200"
@@ -46,7 +44,7 @@ else
     </ul>
 }
 
-- About Me --------------------------------------------------------------
+
 <div class="mb-3">
     <label for="aboutMe" class="form-label">About me</label>
 
@@ -62,7 +60,7 @@ else
     Save
 </button>
 
-- Languages --------------------------------------------------------------
+
 @foreach (var u in listOfUsers)
 {
     <p>@u.languagesSpokenByUser</p>        
