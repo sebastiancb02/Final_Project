@@ -18,7 +18,6 @@ class Program
         User user2 = new User();
         user2.userId = 2;
         user2.name = "Jane";
-        user2.age = 20;
         user2.dateOfBirth = new DateOnly(2006, 4, 5);
         user2.gender = "female";
         user2.nationality = "English";
