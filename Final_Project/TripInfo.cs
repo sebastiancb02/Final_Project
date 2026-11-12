@@ -7,4 +7,5 @@ public class TripInfo
     public DateOnly startDate { get; set; }
     public DateOnly endDate { get; set; }
     public bool tripAlreadyBooked { get; set; }
+    public List<PlannedActivity> plannedActivities { get; set; } = new List<PlannedActivity>();
 }
