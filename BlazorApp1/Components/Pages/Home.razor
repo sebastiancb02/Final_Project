@@ -1,15 +1,32 @@
 ﻿@page "/"
 @using Final_Project
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Home</PageTitle>
 
-- Map over the city you're currently in 
-
-- Overview activities planned by other users, filter by types of activity
-- Sign up for activity
-
-- Add your own activity
+<div>
+    <div id="@ElementId" style="height: 100%;"></div>
+</div>
 
 @code {
- 
+
+    private string ElementId { get; set; } = "map";
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.ImportGoogleTravelMapJsAsync();
+            await JSRuntime.LoadGoogleMapsApiAsync(new GoogleMapsLoadConfig
+            {
+                ApiKey = "AIzaSyAZaz-4oIekDAeUqMDTuKNKnI6Y-nfKfNk"
+            });
+            await JSRuntime.InitGoogleMapsApiAsync(new GoogleMapOptions(
+                ElementId,
+                MapId: "4504f8b37365c3d0",
+                Center: new GoogleMapCoordinate(0, 0)
+            ));
+        }
+    }
+
 }
