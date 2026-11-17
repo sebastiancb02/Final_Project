@@ -23,7 +23,17 @@
             await JSRuntime.InitGoogleMapsApiAsync(new GoogleMapOptions(
                 ElementId,
                 MapId: "4504f8b37365c3d0",
-                Center: new GoogleMapCoordinate(0, 0)
+                Center: new GoogleMapCoordinate(0, 0),
+                Zoom: 8,
+                Controls: new GoogleMapControls(
+                    true,
+                    false,
+                    true,
+                    false, 
+                    false, 
+                    true,
+                    false
+                )
             ));
         }
     }
