@@ -8,8 +8,8 @@ public record GoogleMapsLoadConfig
     public required string ApiKey { get; set; }
     public string Version { get; set; } = "quarterly";
     public string Libraries { get; set; } = "maps,marker";
-    public string Language { get; set; } = "se";
-    public string Region { get; set; } = "BE";
+    public string Language { get; set; } = "en";
+    public string Region { get; set; } = "SE";
 }
 
 public record GoogleMapCoordinate(double lat, double lng);
@@ -34,22 +34,10 @@ public record GoogleMapOptions(
 
 public static class Extensions
 {
-    public static async Task<IJSObjectReference> ImportGoogleTravelMapJsAsync(
-        this IJSRuntime jsRuntime)
-    {
-        var module = await jsRuntime.InvokeAsync<IJSObjectReference>(
-            "import",
-            "./js/TravelMap.js");
-
-        return module;
-    }
-    
-    /*
     public static async Task ImportGoogleTravelMapJsAsync(this IJSRuntime jsRuntime)
     {
         await jsRuntime.InvokeVoidAsync("import", "./js/TravelMap.js");
     }
-    */
 
     public static ValueTask LoadGoogleMapsApiAsync(this IJSRuntime jsRuntime, GoogleMapsLoadConfig config)
     {
@@ -58,6 +46,6 @@ public static class Extensions
 
     public static ValueTask InitGoogleMapsApiAsync(this IJSRuntime jsRuntime, GoogleMapOptions mapOptions)
     {
-        return jsRuntime.InvokeVoidAsync("TravelMapsJs.initMapAsync", mapOptions);
+        return jsRuntime.InvokeVoidAsync("TravelMapJs.initMapAsync", mapOptions);
     }
 }
