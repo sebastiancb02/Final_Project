@@ -29,12 +29,22 @@
                     true,
                     false,
                     true,
-                    false, 
-                    false, 
+                    false,
+                    false,
                     true,
                     false
                 )
             ));
+
+            await JSRuntime.AddGoogleMapMarkersAsync(new GoogleMapMarkerInfo[]
+            {
+                new GoogleMapMarkerInfo(
+                    Info: new GoogleMapMarkerInfoWindow("Let's become seals", "I identify as a seal awawaw"),
+                    Position: new GoogleMapCoordinate(0, 0),
+                    Clickable: true,
+                    Pin: new GoogleMapMarkerPin("purple", "white", "N", "white", false, 1.5)
+                    )
+            });
         }
     }
 

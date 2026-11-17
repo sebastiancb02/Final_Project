@@ -43,6 +43,52 @@ export class TravelMapJs{
             });
             
     }
+    
+    static async addMarkersAsync(markers)
+    {
+        const {InfoWindow} = await google.maps.importLibrary("maps");
+        const {AdvancedMarkerElement, PinElement} = await google.maps.importLibrary("marker");
+        
+        const infoWindow = new InfoWindow();
+        
+        markers.forEach(({info, position, clickable, pin}, i) =>
+        {
+            const {title, content} = info;
+            const {background, borderColor, glyph, glyphColor, isGlyphIcon, scale} = pin;
+            
+            let icon;
+            if (isGlyphIcon)
+            {
+                icon = document.createElement("div");
+                icon.innerHTML = glyph;
+            }    
+            
+            const glyphContent = isGlyphIcon ? icon : glyph;
+            
+            const pinElement = new PinElement({background, borderColor, glyph: glyphContent, glyphColor, scale})
+            
+            const marker = new AdvancedMarkerElement({
+                map: this.map,
+                title: title,
+                position,
+                gmpClickable: clickable,
+                content: pinElement.element
+            });
+
+            if (!clickable) return;
+
+            marker.addListener("click", ({domEvent,}) => {
+                const {target } = domEvent;
+
+                infoWindow.close();
+                infoWindow.setHeaderContent(marker.title);
+                infoWindow.setContent(content);
+                infoWindow.open(marker.map, marker);
+            });
+        });
+        
+    }
+    
 }
 
 window.TravelMapJs = TravelMapJs;
