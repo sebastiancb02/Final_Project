@@ -16,10 +16,10 @@ public class Data
         
         User user2 = new User();
         user2.userId = 2;
-        user2.name = "Jane";
-        user2.dateOfBirth = new DateOnly(2006, 4, 5);
+        user2.name = "Sanna";
+        user2.dateOfBirth = new DateOnly(2001, 4, 5);
         user2.gender = "female";
-        user2.nationality = "English";
+        user2.nationality = "Swedish";
         listOfUsers.Add(user2);
         
         return listOfUsers;
@@ -47,7 +47,7 @@ public class Data
 
         return listOfUsers;
     }
-
+    
     public static List<User> GetUsersWithTripsAndActivities()
     {
         List<User> listOfUsers = Data.GetUsersWithTrips();
@@ -72,7 +72,7 @@ public class Data
         activity2.location = "Barcelona";
         activity2.participants.Add(listOfUsers[0]);
         activity2.activityIsExpired = false;
-        listOfUsers[1].trips[1].plannedActivities.Add(activity2);
+        listOfUsers[1].trips[0].plannedActivities.Add(activity2);
         
         return listOfUsers;
     }
