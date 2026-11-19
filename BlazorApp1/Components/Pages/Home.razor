@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Final_Project
 @inject IJSRuntime JSRuntime
 
 <PageTitle>Home</PageTitle>
@@ -7,10 +8,28 @@
     <div id="@ElementId" style="height: 100%;"></div>
 </div>
 
+Joinable activities!
+@foreach (var mu in MatchedUsers)
+{
+    <p>@mu.name</p>
+    <p>@mu.nationality</p>
+
+    foreach (var muTrip in mu.trips)
+    {
+        foreach (var muActivity in muTrip.plannedActivities)
+        {
+            <p>@muActivity.title</p>
+            <p>@muActivity.type</p>
+            <p>@muActivity.description</p>
+            <p>@muActivity.date</p>
+        }
+    }
+}
+
 @code {
 
     private string ElementId { get; set; } = "map";
-    
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -20,12 +39,12 @@
             {
                 ApiKey = "AIzaSyAZaz-4oIekDAeUqMDTuKNKnI6Y-nfKfNk"
             });
-            await JSRuntime.InitGoogleMapsApiAsync(new GoogleMapOptions(
+            await JSRuntime.InitGoogleMapsApiAsync(new(
                 ElementId,
                 MapId: "4504f8b37365c3d0",
-                Center: new GoogleMapCoordinate(0, 0),
+                Center: new(0, 0),
                 Zoom: 8,
-                Controls: new GoogleMapControls(
+                Controls: new(
                     true,
                     false,
                     true,
@@ -38,14 +57,23 @@
 
             await JSRuntime.AddGoogleMapMarkersAsync(new GoogleMapMarkerInfo[]
             {
-                new GoogleMapMarkerInfo(
-                    Info: new GoogleMapMarkerInfoWindow("Let's become seals", "I identify as a seal awawaw"),
-                    Position: new GoogleMapCoordinate(0, 0),
+                new(
+                    Info: new("Let's become seals"),
+                    Position: new(0, 0),
                     Clickable: true,
-                    Pin: new GoogleMapMarkerPin("purple", "white", "N", "white", false, 1.5)
-                    )
+                    Pin: new("purple", "white", "N", "white", false, 1.5)
+                )
             });
         }
+    }
+
+    public List<User> MatchedUsers { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var listOfUsers = Final_Project.Data.GetUsersWithTripsAndActivities();
+        var matches = Logic.MatchUsersBothByLocationAndOverlappingDates(listOfUsers);
+        MatchedUsers = matches.First().Value;
     }
 
 }
