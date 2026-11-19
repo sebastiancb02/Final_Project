@@ -91,17 +91,5 @@ public class Logic
                                                                                                              
         return matchUsersBothByLocationAndOverlappingDates;                                                          
     }                                                                                                            
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
 }
 
