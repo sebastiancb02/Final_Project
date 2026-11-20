@@ -1,0 +1,33 @@
+@using Final_Project
+
+<EditForm Model="newActivityAddedByUser"
+          OnValidSubmit="AddingActivity"
+          FormName="AddActivity">
+
+    <DataAnnotationsValidator />
+
+    <div style="display: flex; flex-direction: column; gap: 8px; max-width: 350px;">
+	    
+        <label>Title</label>
+        <InputText @bind-Value="newActivityAddedByUser.title" />
+
+        <label>Description</label>
+        <InputText @bind-Value="newActivityAddedByUser.description" />
+
+        <label>Date of the activity</label>
+        <InputDate @bind-Value="newActivityAddedByUser.date" />
+
+        <button type="submit">Add activity</button>
+    </div>
+
+</EditForm>    
+
+@code {
+    private PlannedActivity newActivityAddedByUser {get; set;} = new();
+    private List<PlannedActivity> plannedActivities; 
+
+    private void AddingActivity()
+    {
+        plannedActivities.Add(newActivityAddedByUser);
+    }                        
+}
